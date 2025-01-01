@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:remind_me/features/task/domain/entities/task.dart';
+import 'package:remind_me/services/notification_service.dart';
+
 import '../bloc/task_bloc.dart';
 import '../widgets/task_item.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,19 +36,28 @@ class HomePage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Replace with your navigation logic
-          context.read<TaskBloc>().add( TaskEvent.addTask(
-                Task(
-                  id: '1',
-                  title: 'Sample Task',
-                  description: 'Description',
-                  reminderTime: DateTime.now(),
-                ),
-              ));
-        },
+        onPressed:
+        //  () {
+        //   // Replace with your navigation logic
+        //   // context.read<TaskBloc>().add( TaskEvent.addTask(
+        //   //       Task(
+        //   //         id: '1',
+        //   //         title: 'Sample Task',
+        //   //         description: 'Description',
+        //   //         reminderTime: DateTime.now(),
+        //   //       ),
+        //   //     ));
+        //   // context.push(Routes.getAddTaskRoute());
+
+        // },
+        scheduleReminder,
         child: const Icon(Icons.add),
       ),
     );
+  }
+   void scheduleReminder() {
+    print("Scheduling reminder");
+    DateTime scheduleDate = DateTime.now().add(const Duration(seconds: 10));
+    NotificationChannel.showNotification("title", "message");
   }
 }
