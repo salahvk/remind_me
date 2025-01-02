@@ -1,5 +1,4 @@
 package com.example.remind_me
-
 import android.Manifest
 import android.app.AlarmManager
 import android.app.Notification
@@ -19,14 +18,14 @@ import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
 
-        private val CHANNEL = "com.example.taskbuddy/notifications"
+        private val NCHANNEL = "com.example.taskbuddy/notifications"
+        private val DCHANNEL = "com.example.remind_me/datePicker"
 
         override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
                 super.configureFlutterEngine(flutterEngine)
-
                 requestNotificationPermission()
 
-                MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
+                MethodChannel(flutterEngine.dartExecutor.binaryMessenger, NCHANNEL)
                         .setMethodCallHandler { call, result ->
                                 if (call.method == "scheduleNotification") {
                                         val title = call.argument<String>("title")
@@ -41,6 +40,29 @@ class MainActivity : FlutterActivity() {
                                         Log.d("Notification", "Title: $title")
                                         triggerNotification(title!!, description!!)
                                         result.success(null)
+                                } else if (call.method == "showDatePicker") {
+                                        val datePickerHelper = DatePickerHelper(this)
+                                        datePickerHelper.showDatePicker { selectedDate ->
+                                                result.success(
+                                                        selectedDate
+                                                ) // Send the result back to Flutter
+                                        }
+                                } else if (call.method == "showTimePicker") {
+                                        // dateTimePickerHelper.showTimePicker()
+                                }
+                        }
+
+                MethodChannel(flutterEngine.dartExecutor.binaryMessenger, DCHANNEL)
+                        .setMethodCallHandler { call, result ->
+                                 if (call.method == "showDatePicker") {
+                                        val datePickerHelper = DatePickerHelper(this)
+                                        datePickerHelper.showDatePicker { selectedDate ->
+                                                result.success(
+                                                        selectedDate
+                                                ) // Send the result back to Flutter
+                                        }
+                                } else if (call.method == "showTimePicker") {
+                                        // dateTimePickerHelper.showTimePicker()
                                 }
                         }
         }
@@ -121,22 +143,22 @@ class MainActivity : FlutterActivity() {
                 //     .setPriority(NotificationCompat.PRIORITY_HIGH)
                 //     .setAutoCancel(true)
                 //     .build()
-                val fullScreenIntent =
-                        Intent(context, MainActivity::class.java).apply {
-                                flags =
-                                        Intent.FLAG_ACTIVITY_NEW_TASK or
-                                                Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        }
-                val fullScreenPendingIntent =
-                        PendingIntent.getActivity(
-                                context,
-                                0,
-                                fullScreenIntent,
-                                PendingIntent.FLAG_IMMUTABLE
-                        )
+                // val fullScreenIntent =
+                //         Intent(context, MainActivity::class.java).apply {
+                //                 flags =
+                //                         Intent.FLAG_ACTIVITY_NEW_TASK or
+                //                                 Intent.FLAG_ACTIVITY_CLEAR_TASK
+                //         }
+                // val fullScreenPendingIntent =
+                //         PendingIntent.getActivity(
+                //                 context,
+                //                 0,
+                //                 fullScreenIntent,
+                //                 PendingIntent.FLAG_IMMUTABLE
+                //         )
                 var notification =
                         NotificationCompat.Builder(this, "task_channel")
-                                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                                // .setSmallIcon(R.drawable.ic_launcher_foreground)
                                 .setContentTitle("My notification")
                                 .setContentText("Hello World!")
                                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -177,18 +199,19 @@ class MainActivity : FlutterActivity() {
         }
 
         override fun onRequestPermissionsResult(
-    requestCode: Int,
-    permissions: Array<out String>,
-    grantResults: IntArray
-) {
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    if (requestCode == 101) { // Match the request code
-        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Log.d("Notification", "Notification permission granted")
-        } else {
-            Log.d("Notification", "Notification permission denied")
+                requestCode: Int,
+                permissions: Array<out String>,
+                grantResults: IntArray
+        ) {
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+                if (requestCode == 101) { // Match the request code
+                        if (grantResults.isNotEmpty() &&
+                                        grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        ) {
+                                Log.d("Notification", "Notification permission granted")
+                        } else {
+                                Log.d("Notification", "Notification permission denied")
+                        }
+                }
         }
-    }
-}
-
 }

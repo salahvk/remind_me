@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:remind_me/config/route/route_constants.dart';
 import 'package:remind_me/services/notification_service.dart';
 
 import '../bloc/task_bloc.dart';
@@ -37,20 +39,13 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed:
-            //  () {
-            //   // Replace with your navigation logic
-            //   // context.read<TaskBloc>().add( TaskEvent.addTask(
-            //   //       Task(
-            //   //         id: '1',
-            //   //         title: 'Sample Task',
-            //   //         description: 'Description',
-            //   //         reminderTime: DateTime.now(),
-            //   //       ),
-            //   //     ));
-            //   // context.push(Routes.getAddTaskRoute());
+             () {
+              // Replace with your navigation logic
+            
+              context.push(Routes.getAddTaskRoute());
 
-            // },
-            () {
+            },
+            // () {
             
           // NativeNotificationService.triggerNotification(
           //   "Hi salah ",
@@ -58,14 +53,14 @@ class HomeScreen extends StatelessWidget {
            
           // );
 
-          NativeNotificationService.scheduleNotification(
-            "Hi salah ",
-            "salah is a good good go boy",
-            DateTime.now().add(const Duration(seconds: 5)),
+          // NativeNotificationService.scheduleNotification(
+          //   "Hi salah ",
+          //   "salah is a good good go boy",
+          //   DateTime.now().add(const Duration(seconds: 5)),
            
-          );
+          // );
 
-        },
+        // },
         child: const Icon(Icons.add),
       ),
     );

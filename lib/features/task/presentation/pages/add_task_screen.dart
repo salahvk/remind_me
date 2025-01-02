@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:remind_me/config/theme/color.dart';
 import 'package:remind_me/features/task/domain/entities/task.dart';
+import 'package:remind_me/services/date_time_picker_service.dart';
 
 import '../bloc/task_bloc.dart';
 
@@ -16,13 +18,36 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final _descController = TextEditingController();
   DateTime? _selectedDateTime;
 
+  String _date = "Select Date";
+  String _time = "Select Time";
+
+  // Function to trigger the Date Picker
+  Future<void> _pickDate() async {
+    String? date = await DateTimePickerService().showDatePicker();
+    if (date != null) {
+      setState(() {
+        _date = date;
+      });
+    }
+  }
+
+  // Function to trigger the Time Picker
+  Future<void> _pickTime() async {
+    String? time = await DateTimePickerService().showTimePicker();
+    if (time != null) {
+      setState(() {
+        _time = time;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Task'),
         centerTitle: true,
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: RemindMeColors.primary,
         foregroundColor: Colors.white,
         elevation: 4,
         shadowColor: Colors.black26,
@@ -40,10 +65,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 controller: _titleController,
                 decoration: InputDecoration(
                   labelText: 'Title',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12)),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Colors.deepPurple, width: 2),
+                    borderSide:
+                        const BorderSide(color: Colors.deepPurple, width: 2),
                   ),
                   prefixIcon: const Icon(Icons.title, color: Colors.deepPurple),
                 ),
@@ -56,12 +83,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 maxLines: 3,
                 decoration: InputDecoration(
                   labelText: 'Description',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12)),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Colors.deepPurple, width: 2),
+                    borderSide:
+                        const BorderSide(color: Colors.deepPurple, width: 2),
                   ),
-                  prefixIcon: const Icon(Icons.description, color: Colors.deepPurple),
+                  prefixIcon:
+                      const Icon(Icons.description, color: Colors.deepPurple),
                 ),
               ),
               const SizedBox(height: 16),
@@ -69,37 +99,39 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               /// Date & Time Picker
               InkWell(
                 onTap: () async {
-                  final pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(2022),
-                    lastDate: DateTime(2100),
-                  );
+                  _pickDate();
+                  // final pickedDate = await showDatePicker(
+                  //   context: context,
+                  //   initialDate: DateTime.now(),
+                  //   firstDate: DateTime(2022),
+                  //   lastDate: DateTime(2100),
+                  // );
 
-                  if (pickedDate != null) {
-                    final pickedTime = await showTimePicker(
-                      context: context,
-                      initialTime: TimeOfDay.now(),
-                    );
+                  // if (pickedDate != null) {
+                  //   final pickedTime = await showTimePicker(
+                  //     context: context,
+                  //     initialTime: TimeOfDay.now(),
+                  //   );
 
-                    if (pickedTime != null) {
-                      setState(() {
-                        _selectedDateTime = DateTime(
-                          pickedDate.year,
-                          pickedDate.month,
-                          pickedDate.day,
-                          pickedTime.hour,
-                          pickedTime.minute,
-                        );
-                      });
-                    }
-                  }
+                  //   if (pickedTime != null) {
+                  //     setState(() {
+                  //       _selectedDateTime = DateTime(
+                  //         pickedDate.year,
+                  //         pickedDate.month,
+                  //         pickedDate.day,
+                  //         pickedTime.hour,
+                  //         pickedTime.minute,
+                  //       );
+                  //     });
+                  //   }
+                  // }
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.deepPurple),
+                    border: Border.all(color: RemindMeColors.primary),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -110,7 +142,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                             : '${_selectedDateTime!.toLocal()}'.split('.')[0],
                         style: const TextStyle(fontSize: 16),
                       ),
-                      const Icon(Icons.calendar_today, color: Colors.deepPurple),
+                      const Icon(Icons.calendar_today,
+                          color: Colors.deepPurple),
                     ],
                   ),
                 ),
@@ -123,7 +156,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 height: 50,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    if (_titleController.text.isNotEmpty && _selectedDateTime != null) {
+                    if (_titleController.text.isNotEmpty &&
+                        _selectedDateTime != null) {
                       BlocProvider.of<TaskBloc>(context).add(
                         TaskEvent.addTask(Task(
                           id: DateTime.now().toString(),
@@ -136,7 +170,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Please fill all fields and select a date!'),
+                          content:
+                              Text('Please fill all fields and select a date!'),
                           backgroundColor: Colors.redAccent,
                         ),
                       );
@@ -148,9 +183,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     style: TextStyle(fontSize: 16),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple,
+                    backgroundColor: RemindMeColors.primary,
                     foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
                   ),
                 ),
               ),
