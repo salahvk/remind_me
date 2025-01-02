@@ -37,27 +37,28 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed:
-        //  () {
-        //   // Replace with your navigation logic
-        //   // context.read<TaskBloc>().add( TaskEvent.addTask(
-        //   //       Task(
-        //   //         id: '1',
-        //   //         title: 'Sample Task',
-        //   //         description: 'Description',
-        //   //         reminderTime: DateTime.now(),
-        //   //       ),
-        //   //     ));
-        //   // context.push(Routes.getAddTaskRoute());
+            //  () {
+            //   // Replace with your navigation logic
+            //   // context.read<TaskBloc>().add( TaskEvent.addTask(
+            //   //       Task(
+            //   //         id: '1',
+            //   //         title: 'Sample Task',
+            //   //         description: 'Description',
+            //   //         reminderTime: DateTime.now(),
+            //   //       ),
+            //   //     ));
+            //   // context.push(Routes.getAddTaskRoute());
 
-        // },
-        scheduleReminder,
+            // },
+            () {
+          NativeNotificationService.scheduleNotification(
+            "task.title",
+            "task.description",
+            DateTime.now().add(Duration(seconds: 2)),
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );
-  }
-   void scheduleReminder() {
-    print("Scheduling reminder");
-    DateTime scheduleDate = DateTime.now().add(const Duration(seconds: 10));
-    NotificationChannel.showNotification("title", "message");
   }
 }

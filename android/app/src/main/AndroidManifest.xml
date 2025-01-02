@@ -1,10 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
     <application
         android:label="remind_me"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:enableOnBackInvokedCallback="true">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -27,6 +29,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+         <!-- Register NotificationService -->
+        <receiver android:name=".NotificationService"
+                  android:enabled="true"
+                  android:exported="false"/>
+
+        <!-- Register MarkAsDoneReceiver (if it's a separate receiver for the "Mark as Done" action) -->
+        <receiver android:name=".MarkAsDoneReceiver"
+                  android:enabled="true"
+                  android:exported="false"/>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
