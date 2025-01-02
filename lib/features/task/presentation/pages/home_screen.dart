@@ -51,11 +51,20 @@ class HomeScreen extends StatelessWidget {
 
             // },
             () {
+            
+          // NativeNotificationService.triggerNotification(
+          //   "Hi salah ",
+          //   "salah is a good boy",
+           
+          // );
+
           NativeNotificationService.scheduleNotification(
-            "task.title",
-            "task.description",
-            DateTime.now().add(Duration(seconds: 2)),
+            "Hi salah ",
+            "salah is a good good go boy",
+            DateTime.now().add(const Duration(seconds: 5)),
+           
           );
+
         },
         child: const Icon(Icons.add),
       ),
