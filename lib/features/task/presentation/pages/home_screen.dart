@@ -1,137 +1,162 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:remind_me/config/route/route_constants.dart';
-import 'package:remind_me/services/notification_service.dart';
-
-import '../bloc/task_bloc.dart';
-import '../widgets/task_item.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const platform = MethodChannel('com.example.remind_me/task');
-
-    platform.setMethodCallHandler((call) async {
-      if (call.method == 'markAsDone') {
-        final String taskId = call.arguments;
-        // Handle the task ID
-        print('Task ID: $taskId marked as fdsfdsdone');
-        context.read<TaskBloc>().add(TaskEvent.markTaskCompleted(taskId));
-      }
-    });
     return Scaffold(
-      appBar: AppBar(title: const Text('Taskify')),
-      body: BlocBuilder<TaskBloc, TaskState>(
-        builder: (context, state) {
-          if (state.isLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
+      appBar: AppBar(title: const Text('Dashboard')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Search Bar
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Search...',
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+                prefixIcon: const Icon(Icons.search),
+              ),
+            ),
+            const SizedBox(height: 16),
 
-          if (state.errorMessage != null) {
-            return Center(child: Text(state.errorMessage!));
-          }
+            // Heading: My List
+            const Text(
+              'My List',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
 
-          if (state.tasks.isEmpty) {
-            return const Center(child: Text('No tasks yet!'));
-          }
+            // GridView of 5 items with 2 in a row
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10.0,
+                    mainAxisSpacing: 16.0,
+                    mainAxisExtent: 130),
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return HomeGadget(index: index);
+                },
+              ),
+            ),
 
-          return ListView.builder(
-            itemCount: state.tasks.length,
-            itemBuilder: (context, index) {
-              final task = state.tasks[index];
-              final now = DateTime.now(); // Current date and time
-              final today =
-                  DateTime(now.year, now.month, now.day); // Today's date
-              final taskDate = DateTime(
-                task.reminderTime.year,
-                task.reminderTime.month,
-                task.reminderTime.day,
-              ); // Task's date
-
-              // Check if this is the first item or if the header needs to change
-              bool showTodayHeader = index == 0 && taskDate == today;
-              bool showNotTodayHeader = index == 0 && taskDate != today;
-
-              // Check if the previous task has a different date
-              if (index > 0) {
-                final prevTask = state.tasks[index - 1];
-                final prevTaskDate = DateTime(
-                  prevTask.reminderTime.year,
-                  prevTask.reminderTime.month,
-                  prevTask.reminderTime.day,
-                );
-
-                showTodayHeader = taskDate == today && prevTaskDate != today;
-                showNotTodayHeader = taskDate != today && prevTaskDate == today;
-              }
-
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            // Reminder Tile below the GridView
+            const ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Row(
                 children: [
-                  // Show "Today" header if required
-                  if (showTodayHeader)
-                    const Padding(
-                      padding:
-                          EdgeInsets.only(left: 12, top: 8, bottom: 8),
-                      child: Text(
-                        "Today",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-
-                  // Show "Not Today" header if required
-                  if (showNotTodayHeader)
-                    const Padding(
-                      padding:
-                          EdgeInsets.only(left: 12, top: 8, bottom: 8),
-                      child: Text(
-                        "Upcoming",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-
-                  // Task Item
-                  TaskItem(task: task),
+                  Icon(Icons.access_alarm, color: Colors.blue),
+                  SizedBox(width: 8),
+                  Text('Reminders Test'),
+                  Spacer(),
+                  Text('5', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Icon(Icons.arrow_forward),
                 ],
-              );
-            },
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Replace with your navigation logic
-
-          context.push(Routes.getAddTaskRoute());
-        },
-        // () {
-
-        // NativeNotificationService.triggerNotification(
-        //   "Hi salah ",
-        //   "salah is a good boy",
-
-        // );
-
-        // NativeNotificationService.scheduleNotification(
-        //   "Hi salah ",
-        //   "salah is a good good go boy",
-        //   DateTime.now().add(const Duration(seconds: 5)),
-
-        // );
-
-        // },
-        child: const Icon(Icons.add),
+              ),
+            ),
+          ],
+        ),
       ),
     );
+  }
+}
+
+class HomeGadget extends StatelessWidget {
+  final int index;
+  const HomeGadget({super.key, required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+       context.push(Routes.getHomeRoute());
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Left top icon
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    _getIcons(index),
+                    size: 40,
+                    color: Colors.blue,
+                  ),
+                  const Align(
+                    alignment: Alignment.topRight,
+                    child: Text(
+                      '99', // Dynamic count can be added here
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+      
+              // Left bottom heading (Today, Scheduled, etc.)
+              Text(
+                _getHeading(index),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+      
+              // Right top large count
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  String _getHeading(int index) {
+    switch (index) {
+      case 0:
+        return 'Today';
+      case 1:
+        return 'Scheduled';
+      case 2:
+        return 'All';
+      case 3:
+        return 'Flagged';
+      case 4:
+        return 'Completed';
+      default:
+        return 'Item $index';
+    }
+  }
+
+  IconData _getIcons(int index) {
+    switch (index) {
+      case 0:
+        return Icons.calendar_month;
+      case 1:
+        return Icons.schedule_outlined;
+      case 2:
+        return Icons.list;
+      case 3:
+        return Icons.flag;
+      case 4:
+        return Icons.check_circle;
+      default:
+        return Icons.error;
+    }
   }
 }

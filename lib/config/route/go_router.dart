@@ -5,6 +5,7 @@ import 'package:remind_me/config/route/transition.dart';
 import 'package:remind_me/features/splash/presentation/splash_screen.dart';
 import 'package:remind_me/features/task/presentation/pages/add_task/add_task_screen.dart';
 import 'package:remind_me/features/task/presentation/pages/home_screen.dart';
+import 'package:remind_me/features/task/presentation/pages/task_screen.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -31,7 +32,13 @@ final GoRouter router = GoRouter(
       name: Routes.home,
       path: Routes.getHomeRoute(),
       pageBuilder: (context, state) =>
-          buildPageWithFadeTransition(const HomeScreen(), state),
+          buildPageWithFadeTransition( const HomeScreen(), state),
+    ),
+    GoRoute(
+      name: Routes.task,
+      path: Routes.getTaskRoute(),
+      pageBuilder: (context, state) =>
+          buildPageWithFadeTransition(const TaskScreen(), state),
     ),
     GoRoute(
       name: Routes.addTask,

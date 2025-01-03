@@ -1,6 +1,9 @@
 class AndroidChannels {
-  static const String notificationChannel = "remind_me_android/notificationChannel";
+  static const String notificationChannel =
+      "remind_me_android/notificationChannel";
   static const String dateTimeChannel = "remind_me_android/dateTimeChannel";
+  static const String notificationMarkAsDoneChannel =
+      "remind_me_android/notificationMarkAsDoneChannel";
 }
 
 class IOSChannels {

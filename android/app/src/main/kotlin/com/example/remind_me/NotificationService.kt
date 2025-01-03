@@ -133,17 +133,3 @@ class MarkAsDoneReceiver : BroadcastReceiver() {
         }
 }
 
-// private fun sendBroadcastToFlutter(taskId: String?, context: Context) {
-
-//         val flutterEngine: FlutterEngine = FlutterEngine(context)
-//         flutterEngine.dartExecutor
-//         val channel = EventChannel(flutterEngine.dartExecutor,
-// "com.example.remind_me/mark_as_done")
-
-//         val data = mutableMapOf<String, Any>()
-//         data["taskId"] = taskId ?: ""
-//         data["isDone"] = true
-
-//         // Sending data to Flutter
-//         channel.
-// }

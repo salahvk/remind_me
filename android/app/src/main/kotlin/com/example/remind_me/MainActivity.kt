@@ -11,14 +11,12 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
-import android.content.IntentFilter
-
 
 class MainActivity : FlutterActivity() {
 
-        private val NOTIFICATION_CHANNEL = "com.example.remind_me/notifications"
-        private val DATE_TIME_CHANNEL = "com.example.remind_me/dateTimePicker"
-        private val MARK_AS_DONE_EVENT_CHANNEL = "com.example.remind_me/mark_as_done"
+        private val NOTIFICATION_CHANNEL = "remind_me_android/notificationChannel"
+        private val DATE_TIME_CHANNEL = "remind_me_android/dateTimeChannel"
+        private val MARK_AS_DONE_EVENT_CHANNEL = "remind_me_android/notificationMarkAsDoneChannel"
 
         private lateinit var markAsDoneReceiver: MarkAsDoneReceiver
 
@@ -26,7 +24,6 @@ class MainActivity : FlutterActivity() {
                 super.onStart()
 
                 // Register the receiver
-                
 
         }
 
@@ -54,10 +51,9 @@ class MainActivity : FlutterActivity() {
                                         events: EventChannel.EventSink?
                                 ) {
                                         // Handle stream listener
-                                        print("Listening to Mark as Done events")
+                                        println("Listening to Mark as Done events")
                                         markAsDoneReceiver.setEventSink(events!!)
                                         markAsDoneReceiver.onReceive(context, intent)
-                                        
                                 }
 
                                 override fun onCancel(arguments: Any?) {
@@ -82,7 +78,7 @@ class MainActivity : FlutterActivity() {
                                                 description!!,
                                                 timeMillis!!
                                         )
-                                        result.success("null _________________")
+                                        result.success(null)
                                 }
                         }
 
