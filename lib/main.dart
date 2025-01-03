@@ -5,8 +5,16 @@ import 'package:remind_me/config/theme/light_theme.dart';
 import 'package:remind_me/features/task/data/repositories/task_repository_impl.dart';
 import 'package:remind_me/features/task/domain/repositories/task_repository.dart';
 import 'package:remind_me/features/task/presentation/bloc/task_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
+  HydratedBloc.storage = storage;
   runApp(const RemindMeApp());
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:remind_me/core/extension/string_date_time.dart';
 import 'package:remind_me/features/task/domain/repositories/task_repository.dart';
 import 'package:remind_me/services/date_time_picker_service.dart';
@@ -12,7 +13,7 @@ part 'task_bloc.freezed.dart';
 part 'task_event.dart';
 part 'task_state.dart';
 
-class TaskBloc extends Bloc<TaskEvent, TaskState> {
+class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
   final TaskRepository taskRepository;
   String? selectedDate;
   String? selectedTime;
@@ -23,6 +24,25 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<_SelectTimeEvent>(_onSelectDateTime);
     on<_LoadTasksEvent>(_onLoadTasks);
     on<_ShowErrorEvent>(_onShowError);
+  }
+  @override
+  TaskState? fromJson(Map<String, dynamic> json) {
+    try {
+      return TaskState(
+        tasks: (json['tasks'] as List)
+            .map((e) => Task.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Map<String, dynamic>? toJson(TaskState state) {
+    return {
+      'tasks': state.tasks.map((task) => task.toJson()).toList(),
+    };
   }
 
   void _onAddTask(_AddTaskEvent event, Emitter<TaskState> emit) {
