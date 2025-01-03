@@ -32,33 +32,89 @@ class HomeScreen extends StatelessWidget {
             itemCount: state.tasks.length,
             itemBuilder: (context, index) {
               final task = state.tasks[index];
-              return TaskItem(task: task);
+              final now = DateTime.now(); // Current date and time
+              final today =
+                  DateTime(now.year, now.month, now.day); // Today's date
+              final taskDate = DateTime(
+                task.reminderTime.year,
+                task.reminderTime.month,
+                task.reminderTime.day,
+              ); // Task's date
+
+              // Check if this is the first item or if the header needs to change
+              bool showTodayHeader = index == 0 && taskDate == today;
+              bool showNotTodayHeader = index == 0 && taskDate != today;
+
+              // Check if the previous task has a different date
+              if (index > 0) {
+                final prevTask = state.tasks[index - 1];
+                final prevTaskDate = DateTime(
+                  prevTask.reminderTime.year,
+                  prevTask.reminderTime.month,
+                  prevTask.reminderTime.day,
+                );
+
+                showTodayHeader = taskDate == today && prevTaskDate != today;
+                showNotTodayHeader = taskDate != today && prevTaskDate == today;
+              }
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Show "Today" header if required
+                  if (showTodayHeader)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12,top: 8,bottom: 8),
+                      child: Text(
+                        "Today",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+
+                  // Show "Not Today" header if required
+                  if (showNotTodayHeader)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12,top: 8,bottom: 8),
+                      child: Text(
+                        "Upcoming",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+
+                  // Task Item
+                  TaskItem(task: task),
+                ],
+              );
             },
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed:
-             () {
-              // Replace with your navigation logic
-            
-              context.push(Routes.getAddTaskRoute());
+        onPressed: () {
+          // Replace with your navigation logic
 
-            },
-            // () {
-            
-          // NativeNotificationService.triggerNotification(
-          //   "Hi salah ",
-          //   "salah is a good boy",
-           
-          // );
+          context.push(Routes.getAddTaskRoute());
+        },
+        // () {
 
-          // NativeNotificationService.scheduleNotification(
-          //   "Hi salah ",
-          //   "salah is a good good go boy",
-          //   DateTime.now().add(const Duration(seconds: 5)),
-           
-          // );
+        // NativeNotificationService.triggerNotification(
+        //   "Hi salah ",
+        //   "salah is a good boy",
+
+        // );
+
+        // NativeNotificationService.scheduleNotification(
+        //   "Hi salah ",
+        //   "salah is a good good go boy",
+        //   DateTime.now().add(const Duration(seconds: 5)),
+
+        // );
 
         // },
         child: const Icon(Icons.add),
