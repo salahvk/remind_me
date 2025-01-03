@@ -1,29 +1,31 @@
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 import 'package:remind_me/config/method_channel/channel.dart';
 
 class DateTimePickerService {
-  static const platform = MethodChannel(RemindMeChannels.dateTimeChannel);
+  static const androidChannel = MethodChannel(AndroidChannels.dateTimeChannel);
+  static const iosChannel = MethodChannel(IOSChannels.dateTimeChannel);
 
-  // Function to call the native Date Picker
   Future<String?> showDatePicker() async {
+    final channel = Platform.isAndroid ? androidChannel : iosChannel;
     try {
       final String? selectedDate =
-          await platform.invokeMethod(RemindMeChannelMethods.showDatePicker);
+          await channel.invokeMethod(RemindMeChannelMethods.showDatePicker);
       return selectedDate;
     } on PlatformException catch (e) {
       return "Error: ${e.message}";
     }
   }
 
-  // Function to call the native Time Picker
   Future<String?> showTimePicker() async {
+    final channel = Platform.isAndroid ? androidChannel : iosChannel;
     try {
       final String? selectedTime =
-          await platform.invokeMethod(RemindMeChannelMethods.showTimePicker);
+          await channel.invokeMethod(RemindMeChannelMethods.showTimePicker);
       return selectedTime;
     } on PlatformException catch (e) {
       return "Error: ${e.message}";
     }
   }
-
 }

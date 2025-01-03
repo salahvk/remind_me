@@ -1,7 +1,11 @@
-class RemindMeChannels {
-  static const String notificationChannel =
-      "com.example.remind_me/notifications";
-  static const String dateTimeChannel = "com.example.remind_me/dateTimePicker";
+class AndroidChannels {
+  static const String notificationChannel = "remind_me_android/notificationChannel";
+  static const String dateTimeChannel = "remind_me_android/dateTimeChannel";
+}
+
+class IOSChannels {
+  static const String notificationChannel = "remind_me_ios/notificationChannel";
+  static const String dateTimeChannel = "remind_me_ios/dateTimeChannel";
 }
 
 class RemindMeChannelMethods {
