@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="primary">#103E64</color>
     <style name="LaunchTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/launch_background</item>
     </style>
@@ -12,13 +13,33 @@
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
-    <style name="CustomDatePickerDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-        <item name="android:windowBackground">@drawable/custom_dialog_background</item>
-        <item name="android:buttonStyle">@style/CustomButtonStyle</item>
+
+    <style name="CustomDatePickerDialogStyle" parent="Theme.MaterialComponents.Light.Dialog">
+        <!-- Change header background color -->
+        <item name="colorPrimary">#103E64</item>
+        <item name="colorAccent">#103E64</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/DatePickerButtonStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/DatePickerButtonStyle</item>
     </style>
 
-    <style name="CustomButtonStyle">
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:background">@drawable/button_background</item>
+    <!-- Button Style -->
+    <style name="DatePickerButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#103E64</item>
     </style>
+
+    <style name="CustomTimePickerDialogStyle" parent="Theme.MaterialComponents.Light.Dialog">
+        <!-- Header color -->
+        <item name="colorPrimary">#103E64</item>
+        <item name="colorAccent">#103E64</item>
+
+        <!-- Button style -->
+        <item name="android:buttonBarPositiveButtonStyle">@style/TimePickerButtonStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/TimePickerButtonStyle</item>
+    </style>
+
+    <style name="TimePickerButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#103E64</item>
+    </style>
+
+
 </resources>

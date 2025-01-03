@@ -1,4 +1,5 @@
 package com.example.remind_me
+
 import android.Manifest
 import android.app.AlarmManager
 import android.app.Notification
@@ -40,21 +41,12 @@ class MainActivity : FlutterActivity() {
                                         Log.d("Notification", "Title: $title")
                                         triggerNotification(title!!, description!!)
                                         result.success(null)
-                                } else if (call.method == "showDatePicker") {
-                                        val datePickerHelper = DatePickerHelper(this)
-                                        datePickerHelper.showDatePicker { selectedDate ->
-                                                result.success(
-                                                        selectedDate
-                                                ) // Send the result back to Flutter
-                                        }
-                                } else if (call.method == "showTimePicker") {
-                                        // dateTimePickerHelper.showTimePicker()
                                 }
                         }
 
                 MethodChannel(flutterEngine.dartExecutor.binaryMessenger, DCHANNEL)
                         .setMethodCallHandler { call, result ->
-                                 if (call.method == "showDatePicker") {
+                                if (call.method == "showDatePicker") {
                                         val datePickerHelper = DatePickerHelper(this)
                                         datePickerHelper.showDatePicker { selectedDate ->
                                                 result.success(
@@ -62,7 +54,12 @@ class MainActivity : FlutterActivity() {
                                                 ) // Send the result back to Flutter
                                         }
                                 } else if (call.method == "showTimePicker") {
-                                        // dateTimePickerHelper.showTimePicker()
+                                        val datePickerHelper = DatePickerHelper(this)
+                                        datePickerHelper.showTimePicker { selectedTime ->
+                                                result.success(
+                                                        selectedTime
+                                                ) // Send the result back to FlutterF
+                                        }
                                 }
                         }
         }

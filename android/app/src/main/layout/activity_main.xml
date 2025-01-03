@@ -32,27 +32,6 @@
         android:layout_marginEnd="16dp"
         android:onClick="onAddTaskClicked" />
 
-    <Button
-        android:id="@+id/btnDatePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Select Date" />
-
-    <TextView
-        android:id="@+id/tvSelectedDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnDatePicker"
-        android:layout_centerHorizontal="true"
-        android:padding="16dp"
-        android:textSize="18sp" />
-
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:datePickerMode="calendar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

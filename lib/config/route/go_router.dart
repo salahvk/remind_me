@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:remind_me/config/route/route_constants.dart';
 import 'package:remind_me/config/route/transition.dart';
 import 'package:remind_me/features/splash/presentation/splash_screen.dart';
-import 'package:remind_me/features/task/presentation/pages/add_task_screen.dart';
+import 'package:remind_me/features/task/presentation/pages/add_task/add_task_screen.dart';
 import 'package:remind_me/features/task/presentation/pages/home_screen.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

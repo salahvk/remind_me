@@ -7,8 +7,10 @@ class DateTimePickerService {
   Future<String?> showDatePicker() async {
     try {
       // Invoke the method to show the Date Picker dialog
-      await platform.invokeMethod('showDatePicker');
-      return null;  // You could return the date here if needed, but this will handle UI
+      final String? selectedDate =
+          await platform.invokeMethod('showDatePicker');
+      print("Selected Date: $selectedDate");
+      return selectedDate; // You could return the date here if needed, but this will handle UI
     } on PlatformException catch (e) {
       print("Failed to show DatePicker: '${e.message}'.");
       return "Error: ${e.message}";
@@ -19,8 +21,8 @@ class DateTimePickerService {
   Future<String?> showTimePicker() async {
     try {
       // Invoke the method to show the Time Picker dialog
-      await platform.invokeMethod('showTimePicker');
-      return null;  // Similar to DatePicker, this can be handled via UI or callback
+      final String? selectedTime = await platform.invokeMethod('showTimePicker');
+      return selectedTime; // Similar to DatePicker, this can be handled via UI or callback
     } on PlatformException catch (e) {
       print("Failed to show TimePicker: '${e.message}'.");
       return "Error: ${e.message}";

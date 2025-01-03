@@ -20,6 +20,8 @@ mixin _$TaskEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Task task) addTask,
     required TResult Function(String taskId) markTaskCompleted,
+    required TResult Function() selectDate,
+    required TResult Function() selectTime,
     required TResult Function() loadTasks,
     required TResult Function(String message) showError,
   }) =>
@@ -28,6 +30,8 @@ mixin _$TaskEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Task task)? addTask,
     TResult? Function(String taskId)? markTaskCompleted,
+    TResult? Function()? selectDate,
+    TResult? Function()? selectTime,
     TResult? Function()? loadTasks,
     TResult? Function(String message)? showError,
   }) =>
@@ -36,6 +40,8 @@ mixin _$TaskEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Task task)? addTask,
     TResult Function(String taskId)? markTaskCompleted,
+    TResult Function()? selectDate,
+    TResult Function()? selectTime,
     TResult Function()? loadTasks,
     TResult Function(String message)? showError,
     required TResult orElse(),
@@ -45,6 +51,8 @@ mixin _$TaskEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_AddTaskEvent value) addTask,
     required TResult Function(_MarkTaskCompletedEvent value) markTaskCompleted,
+    required TResult Function(_SelectDateEvent value) selectDate,
+    required TResult Function(_SelectTimeEvent value) selectTime,
     required TResult Function(_LoadTasksEvent value) loadTasks,
     required TResult Function(_ShowErrorEvent value) showError,
   }) =>
@@ -53,6 +61,8 @@ mixin _$TaskEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddTaskEvent value)? addTask,
     TResult? Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult? Function(_SelectDateEvent value)? selectDate,
+    TResult? Function(_SelectTimeEvent value)? selectTime,
     TResult? Function(_LoadTasksEvent value)? loadTasks,
     TResult? Function(_ShowErrorEvent value)? showError,
   }) =>
@@ -61,6 +71,8 @@ mixin _$TaskEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddTaskEvent value)? addTask,
     TResult Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult Function(_SelectDateEvent value)? selectDate,
+    TResult Function(_SelectTimeEvent value)? selectTime,
     TResult Function(_LoadTasksEvent value)? loadTasks,
     TResult Function(_ShowErrorEvent value)? showError,
     required TResult orElse(),
@@ -158,6 +170,8 @@ class _$AddTaskEventImpl implements _AddTaskEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Task task) addTask,
     required TResult Function(String taskId) markTaskCompleted,
+    required TResult Function() selectDate,
+    required TResult Function() selectTime,
     required TResult Function() loadTasks,
     required TResult Function(String message) showError,
   }) {
@@ -169,6 +183,8 @@ class _$AddTaskEventImpl implements _AddTaskEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Task task)? addTask,
     TResult? Function(String taskId)? markTaskCompleted,
+    TResult? Function()? selectDate,
+    TResult? Function()? selectTime,
     TResult? Function()? loadTasks,
     TResult? Function(String message)? showError,
   }) {
@@ -180,6 +196,8 @@ class _$AddTaskEventImpl implements _AddTaskEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Task task)? addTask,
     TResult Function(String taskId)? markTaskCompleted,
+    TResult Function()? selectDate,
+    TResult Function()? selectTime,
     TResult Function()? loadTasks,
     TResult Function(String message)? showError,
     required TResult orElse(),
@@ -195,6 +213,8 @@ class _$AddTaskEventImpl implements _AddTaskEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_AddTaskEvent value) addTask,
     required TResult Function(_MarkTaskCompletedEvent value) markTaskCompleted,
+    required TResult Function(_SelectDateEvent value) selectDate,
+    required TResult Function(_SelectTimeEvent value) selectTime,
     required TResult Function(_LoadTasksEvent value) loadTasks,
     required TResult Function(_ShowErrorEvent value) showError,
   }) {
@@ -206,6 +226,8 @@ class _$AddTaskEventImpl implements _AddTaskEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddTaskEvent value)? addTask,
     TResult? Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult? Function(_SelectDateEvent value)? selectDate,
+    TResult? Function(_SelectTimeEvent value)? selectTime,
     TResult? Function(_LoadTasksEvent value)? loadTasks,
     TResult? Function(_ShowErrorEvent value)? showError,
   }) {
@@ -217,6 +239,8 @@ class _$AddTaskEventImpl implements _AddTaskEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddTaskEvent value)? addTask,
     TResult Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult Function(_SelectDateEvent value)? selectDate,
+    TResult Function(_SelectTimeEvent value)? selectTime,
     TResult Function(_LoadTasksEvent value)? loadTasks,
     TResult Function(_ShowErrorEvent value)? showError,
     required TResult orElse(),
@@ -313,6 +337,8 @@ class _$MarkTaskCompletedEventImpl implements _MarkTaskCompletedEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Task task) addTask,
     required TResult Function(String taskId) markTaskCompleted,
+    required TResult Function() selectDate,
+    required TResult Function() selectTime,
     required TResult Function() loadTasks,
     required TResult Function(String message) showError,
   }) {
@@ -324,6 +350,8 @@ class _$MarkTaskCompletedEventImpl implements _MarkTaskCompletedEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Task task)? addTask,
     TResult? Function(String taskId)? markTaskCompleted,
+    TResult? Function()? selectDate,
+    TResult? Function()? selectTime,
     TResult? Function()? loadTasks,
     TResult? Function(String message)? showError,
   }) {
@@ -335,6 +363,8 @@ class _$MarkTaskCompletedEventImpl implements _MarkTaskCompletedEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Task task)? addTask,
     TResult Function(String taskId)? markTaskCompleted,
+    TResult Function()? selectDate,
+    TResult Function()? selectTime,
     TResult Function()? loadTasks,
     TResult Function(String message)? showError,
     required TResult orElse(),
@@ -350,6 +380,8 @@ class _$MarkTaskCompletedEventImpl implements _MarkTaskCompletedEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_AddTaskEvent value) addTask,
     required TResult Function(_MarkTaskCompletedEvent value) markTaskCompleted,
+    required TResult Function(_SelectDateEvent value) selectDate,
+    required TResult Function(_SelectTimeEvent value) selectTime,
     required TResult Function(_LoadTasksEvent value) loadTasks,
     required TResult Function(_ShowErrorEvent value) showError,
   }) {
@@ -361,6 +393,8 @@ class _$MarkTaskCompletedEventImpl implements _MarkTaskCompletedEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddTaskEvent value)? addTask,
     TResult? Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult? Function(_SelectDateEvent value)? selectDate,
+    TResult? Function(_SelectTimeEvent value)? selectTime,
     TResult? Function(_LoadTasksEvent value)? loadTasks,
     TResult? Function(_ShowErrorEvent value)? showError,
   }) {
@@ -372,6 +406,8 @@ class _$MarkTaskCompletedEventImpl implements _MarkTaskCompletedEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddTaskEvent value)? addTask,
     TResult Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult Function(_SelectDateEvent value)? selectDate,
+    TResult Function(_SelectTimeEvent value)? selectTime,
     TResult Function(_LoadTasksEvent value)? loadTasks,
     TResult Function(_ShowErrorEvent value)? showError,
     required TResult orElse(),
@@ -394,6 +430,264 @@ abstract class _MarkTaskCompletedEvent implements TaskEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MarkTaskCompletedEventImplCopyWith<_$MarkTaskCompletedEventImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SelectDateEventImplCopyWith<$Res> {
+  factory _$$SelectDateEventImplCopyWith(_$SelectDateEventImpl value,
+          $Res Function(_$SelectDateEventImpl) then) =
+      __$$SelectDateEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SelectDateEventImplCopyWithImpl<$Res>
+    extends _$TaskEventCopyWithImpl<$Res, _$SelectDateEventImpl>
+    implements _$$SelectDateEventImplCopyWith<$Res> {
+  __$$SelectDateEventImplCopyWithImpl(
+      _$SelectDateEventImpl _value, $Res Function(_$SelectDateEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TaskEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SelectDateEventImpl implements _SelectDateEvent {
+  const _$SelectDateEventImpl();
+
+  @override
+  String toString() {
+    return 'TaskEvent.selectDate()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SelectDateEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Task task) addTask,
+    required TResult Function(String taskId) markTaskCompleted,
+    required TResult Function() selectDate,
+    required TResult Function() selectTime,
+    required TResult Function() loadTasks,
+    required TResult Function(String message) showError,
+  }) {
+    return selectDate();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Task task)? addTask,
+    TResult? Function(String taskId)? markTaskCompleted,
+    TResult? Function()? selectDate,
+    TResult? Function()? selectTime,
+    TResult? Function()? loadTasks,
+    TResult? Function(String message)? showError,
+  }) {
+    return selectDate?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Task task)? addTask,
+    TResult Function(String taskId)? markTaskCompleted,
+    TResult Function()? selectDate,
+    TResult Function()? selectTime,
+    TResult Function()? loadTasks,
+    TResult Function(String message)? showError,
+    required TResult orElse(),
+  }) {
+    if (selectDate != null) {
+      return selectDate();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AddTaskEvent value) addTask,
+    required TResult Function(_MarkTaskCompletedEvent value) markTaskCompleted,
+    required TResult Function(_SelectDateEvent value) selectDate,
+    required TResult Function(_SelectTimeEvent value) selectTime,
+    required TResult Function(_LoadTasksEvent value) loadTasks,
+    required TResult Function(_ShowErrorEvent value) showError,
+  }) {
+    return selectDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AddTaskEvent value)? addTask,
+    TResult? Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult? Function(_SelectDateEvent value)? selectDate,
+    TResult? Function(_SelectTimeEvent value)? selectTime,
+    TResult? Function(_LoadTasksEvent value)? loadTasks,
+    TResult? Function(_ShowErrorEvent value)? showError,
+  }) {
+    return selectDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AddTaskEvent value)? addTask,
+    TResult Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult Function(_SelectDateEvent value)? selectDate,
+    TResult Function(_SelectTimeEvent value)? selectTime,
+    TResult Function(_LoadTasksEvent value)? loadTasks,
+    TResult Function(_ShowErrorEvent value)? showError,
+    required TResult orElse(),
+  }) {
+    if (selectDate != null) {
+      return selectDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SelectDateEvent implements TaskEvent {
+  const factory _SelectDateEvent() = _$SelectDateEventImpl;
+}
+
+/// @nodoc
+abstract class _$$SelectTimeEventImplCopyWith<$Res> {
+  factory _$$SelectTimeEventImplCopyWith(_$SelectTimeEventImpl value,
+          $Res Function(_$SelectTimeEventImpl) then) =
+      __$$SelectTimeEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SelectTimeEventImplCopyWithImpl<$Res>
+    extends _$TaskEventCopyWithImpl<$Res, _$SelectTimeEventImpl>
+    implements _$$SelectTimeEventImplCopyWith<$Res> {
+  __$$SelectTimeEventImplCopyWithImpl(
+      _$SelectTimeEventImpl _value, $Res Function(_$SelectTimeEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TaskEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SelectTimeEventImpl implements _SelectTimeEvent {
+  const _$SelectTimeEventImpl();
+
+  @override
+  String toString() {
+    return 'TaskEvent.selectTime()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SelectTimeEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Task task) addTask,
+    required TResult Function(String taskId) markTaskCompleted,
+    required TResult Function() selectDate,
+    required TResult Function() selectTime,
+    required TResult Function() loadTasks,
+    required TResult Function(String message) showError,
+  }) {
+    return selectTime();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Task task)? addTask,
+    TResult? Function(String taskId)? markTaskCompleted,
+    TResult? Function()? selectDate,
+    TResult? Function()? selectTime,
+    TResult? Function()? loadTasks,
+    TResult? Function(String message)? showError,
+  }) {
+    return selectTime?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Task task)? addTask,
+    TResult Function(String taskId)? markTaskCompleted,
+    TResult Function()? selectDate,
+    TResult Function()? selectTime,
+    TResult Function()? loadTasks,
+    TResult Function(String message)? showError,
+    required TResult orElse(),
+  }) {
+    if (selectTime != null) {
+      return selectTime();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AddTaskEvent value) addTask,
+    required TResult Function(_MarkTaskCompletedEvent value) markTaskCompleted,
+    required TResult Function(_SelectDateEvent value) selectDate,
+    required TResult Function(_SelectTimeEvent value) selectTime,
+    required TResult Function(_LoadTasksEvent value) loadTasks,
+    required TResult Function(_ShowErrorEvent value) showError,
+  }) {
+    return selectTime(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AddTaskEvent value)? addTask,
+    TResult? Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult? Function(_SelectDateEvent value)? selectDate,
+    TResult? Function(_SelectTimeEvent value)? selectTime,
+    TResult? Function(_LoadTasksEvent value)? loadTasks,
+    TResult? Function(_ShowErrorEvent value)? showError,
+  }) {
+    return selectTime?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AddTaskEvent value)? addTask,
+    TResult Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult Function(_SelectDateEvent value)? selectDate,
+    TResult Function(_SelectTimeEvent value)? selectTime,
+    TResult Function(_LoadTasksEvent value)? loadTasks,
+    TResult Function(_ShowErrorEvent value)? showError,
+    required TResult orElse(),
+  }) {
+    if (selectTime != null) {
+      return selectTime(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SelectTimeEvent implements TaskEvent {
+  const factory _SelectTimeEvent() = _$SelectTimeEventImpl;
 }
 
 /// @nodoc
@@ -439,6 +733,8 @@ class _$LoadTasksEventImpl implements _LoadTasksEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Task task) addTask,
     required TResult Function(String taskId) markTaskCompleted,
+    required TResult Function() selectDate,
+    required TResult Function() selectTime,
     required TResult Function() loadTasks,
     required TResult Function(String message) showError,
   }) {
@@ -450,6 +746,8 @@ class _$LoadTasksEventImpl implements _LoadTasksEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Task task)? addTask,
     TResult? Function(String taskId)? markTaskCompleted,
+    TResult? Function()? selectDate,
+    TResult? Function()? selectTime,
     TResult? Function()? loadTasks,
     TResult? Function(String message)? showError,
   }) {
@@ -461,6 +759,8 @@ class _$LoadTasksEventImpl implements _LoadTasksEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Task task)? addTask,
     TResult Function(String taskId)? markTaskCompleted,
+    TResult Function()? selectDate,
+    TResult Function()? selectTime,
     TResult Function()? loadTasks,
     TResult Function(String message)? showError,
     required TResult orElse(),
@@ -476,6 +776,8 @@ class _$LoadTasksEventImpl implements _LoadTasksEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_AddTaskEvent value) addTask,
     required TResult Function(_MarkTaskCompletedEvent value) markTaskCompleted,
+    required TResult Function(_SelectDateEvent value) selectDate,
+    required TResult Function(_SelectTimeEvent value) selectTime,
     required TResult Function(_LoadTasksEvent value) loadTasks,
     required TResult Function(_ShowErrorEvent value) showError,
   }) {
@@ -487,6 +789,8 @@ class _$LoadTasksEventImpl implements _LoadTasksEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddTaskEvent value)? addTask,
     TResult? Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult? Function(_SelectDateEvent value)? selectDate,
+    TResult? Function(_SelectTimeEvent value)? selectTime,
     TResult? Function(_LoadTasksEvent value)? loadTasks,
     TResult? Function(_ShowErrorEvent value)? showError,
   }) {
@@ -498,6 +802,8 @@ class _$LoadTasksEventImpl implements _LoadTasksEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddTaskEvent value)? addTask,
     TResult Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult Function(_SelectDateEvent value)? selectDate,
+    TResult Function(_SelectTimeEvent value)? selectTime,
     TResult Function(_LoadTasksEvent value)? loadTasks,
     TResult Function(_ShowErrorEvent value)? showError,
     required TResult orElse(),
@@ -584,6 +890,8 @@ class _$ShowErrorEventImpl implements _ShowErrorEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Task task) addTask,
     required TResult Function(String taskId) markTaskCompleted,
+    required TResult Function() selectDate,
+    required TResult Function() selectTime,
     required TResult Function() loadTasks,
     required TResult Function(String message) showError,
   }) {
@@ -595,6 +903,8 @@ class _$ShowErrorEventImpl implements _ShowErrorEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Task task)? addTask,
     TResult? Function(String taskId)? markTaskCompleted,
+    TResult? Function()? selectDate,
+    TResult? Function()? selectTime,
     TResult? Function()? loadTasks,
     TResult? Function(String message)? showError,
   }) {
@@ -606,6 +916,8 @@ class _$ShowErrorEventImpl implements _ShowErrorEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Task task)? addTask,
     TResult Function(String taskId)? markTaskCompleted,
+    TResult Function()? selectDate,
+    TResult Function()? selectTime,
     TResult Function()? loadTasks,
     TResult Function(String message)? showError,
     required TResult orElse(),
@@ -621,6 +933,8 @@ class _$ShowErrorEventImpl implements _ShowErrorEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_AddTaskEvent value) addTask,
     required TResult Function(_MarkTaskCompletedEvent value) markTaskCompleted,
+    required TResult Function(_SelectDateEvent value) selectDate,
+    required TResult Function(_SelectTimeEvent value) selectTime,
     required TResult Function(_LoadTasksEvent value) loadTasks,
     required TResult Function(_ShowErrorEvent value) showError,
   }) {
@@ -632,6 +946,8 @@ class _$ShowErrorEventImpl implements _ShowErrorEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AddTaskEvent value)? addTask,
     TResult? Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult? Function(_SelectDateEvent value)? selectDate,
+    TResult? Function(_SelectTimeEvent value)? selectTime,
     TResult? Function(_LoadTasksEvent value)? loadTasks,
     TResult? Function(_ShowErrorEvent value)? showError,
   }) {
@@ -643,6 +959,8 @@ class _$ShowErrorEventImpl implements _ShowErrorEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AddTaskEvent value)? addTask,
     TResult Function(_MarkTaskCompletedEvent value)? markTaskCompleted,
+    TResult Function(_SelectDateEvent value)? selectDate,
+    TResult Function(_SelectTimeEvent value)? selectTime,
     TResult Function(_LoadTasksEvent value)? loadTasks,
     TResult Function(_ShowErrorEvent value)? showError,
     required TResult orElse(),
@@ -671,6 +989,9 @@ mixin _$TaskState {
   List<Task> get tasks => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
+  DateTime? get selectedDateTime => throw _privateConstructorUsedError;
+  String? get selectedDate => throw _privateConstructorUsedError;
+  String? get selectedTime => throw _privateConstructorUsedError;
 
   /// Create a copy of TaskState
   /// with the given fields replaced by the non-null parameter values.
@@ -684,7 +1005,13 @@ abstract class $TaskStateCopyWith<$Res> {
   factory $TaskStateCopyWith(TaskState value, $Res Function(TaskState) then) =
       _$TaskStateCopyWithImpl<$Res, TaskState>;
   @useResult
-  $Res call({List<Task> tasks, bool isLoading, String? errorMessage});
+  $Res call(
+      {List<Task> tasks,
+      bool isLoading,
+      String? errorMessage,
+      DateTime? selectedDateTime,
+      String? selectedDate,
+      String? selectedTime});
 }
 
 /// @nodoc
@@ -705,6 +1032,9 @@ class _$TaskStateCopyWithImpl<$Res, $Val extends TaskState>
     Object? tasks = null,
     Object? isLoading = null,
     Object? errorMessage = freezed,
+    Object? selectedDateTime = freezed,
+    Object? selectedDate = freezed,
+    Object? selectedTime = freezed,
   }) {
     return _then(_value.copyWith(
       tasks: null == tasks
@@ -719,6 +1049,18 @@ class _$TaskStateCopyWithImpl<$Res, $Val extends TaskState>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedDateTime: freezed == selectedDateTime
+          ? _value.selectedDateTime
+          : selectedDateTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      selectedDate: freezed == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      selectedTime: freezed == selectedTime
+          ? _value.selectedTime
+          : selectedTime // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -731,7 +1073,13 @@ abstract class _$$TaskStateImplCopyWith<$Res>
       __$$TaskStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Task> tasks, bool isLoading, String? errorMessage});
+  $Res call(
+      {List<Task> tasks,
+      bool isLoading,
+      String? errorMessage,
+      DateTime? selectedDateTime,
+      String? selectedDate,
+      String? selectedTime});
 }
 
 /// @nodoc
@@ -750,6 +1098,9 @@ class __$$TaskStateImplCopyWithImpl<$Res>
     Object? tasks = null,
     Object? isLoading = null,
     Object? errorMessage = freezed,
+    Object? selectedDateTime = freezed,
+    Object? selectedDate = freezed,
+    Object? selectedTime = freezed,
   }) {
     return _then(_$TaskStateImpl(
       tasks: null == tasks
@@ -764,6 +1115,18 @@ class __$$TaskStateImplCopyWithImpl<$Res>
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedDateTime: freezed == selectedDateTime
+          ? _value.selectedDateTime
+          : selectedDateTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      selectedDate: freezed == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      selectedTime: freezed == selectedTime
+          ? _value.selectedTime
+          : selectedTime // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -774,7 +1137,10 @@ class _$TaskStateImpl implements _TaskState {
   const _$TaskStateImpl(
       {final List<Task> tasks = const [],
       this.isLoading = false,
-      this.errorMessage})
+      this.errorMessage,
+      this.selectedDateTime,
+      this.selectedDate,
+      this.selectedTime})
       : _tasks = tasks;
 
   final List<Task> _tasks;
@@ -791,10 +1157,16 @@ class _$TaskStateImpl implements _TaskState {
   final bool isLoading;
   @override
   final String? errorMessage;
+  @override
+  final DateTime? selectedDateTime;
+  @override
+  final String? selectedDate;
+  @override
+  final String? selectedTime;
 
   @override
   String toString() {
-    return 'TaskState(tasks: $tasks, isLoading: $isLoading, errorMessage: $errorMessage)';
+    return 'TaskState(tasks: $tasks, isLoading: $isLoading, errorMessage: $errorMessage, selectedDateTime: $selectedDateTime, selectedDate: $selectedDate, selectedTime: $selectedTime)';
   }
 
   @override
@@ -806,12 +1178,24 @@ class _$TaskStateImpl implements _TaskState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.selectedDateTime, selectedDateTime) ||
+                other.selectedDateTime == selectedDateTime) &&
+            (identical(other.selectedDate, selectedDate) ||
+                other.selectedDate == selectedDate) &&
+            (identical(other.selectedTime, selectedTime) ||
+                other.selectedTime == selectedTime));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_tasks), isLoading, errorMessage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_tasks),
+      isLoading,
+      errorMessage,
+      selectedDateTime,
+      selectedDate,
+      selectedTime);
 
   /// Create a copy of TaskState
   /// with the given fields replaced by the non-null parameter values.
@@ -826,7 +1210,10 @@ abstract class _TaskState implements TaskState {
   const factory _TaskState(
       {final List<Task> tasks,
       final bool isLoading,
-      final String? errorMessage}) = _$TaskStateImpl;
+      final String? errorMessage,
+      final DateTime? selectedDateTime,
+      final String? selectedDate,
+      final String? selectedTime}) = _$TaskStateImpl;
 
   @override
   List<Task> get tasks;
@@ -834,6 +1221,12 @@ abstract class _TaskState implements TaskState {
   bool get isLoading;
   @override
   String? get errorMessage;
+  @override
+  DateTime? get selectedDateTime;
+  @override
+  String? get selectedDate;
+  @override
+  String? get selectedTime;
 
   /// Create a copy of TaskState
   /// with the given fields replaced by the non-null parameter values.

@@ -6,5 +6,8 @@ class TaskState with _$TaskState {
     @Default([]) List<Task> tasks,
     @Default(false) bool isLoading,
     String? errorMessage,
+    DateTime? selectedDateTime,
+    String? selectedDate,
+    String? selectedTime,
   }) = _TaskState;
 }
