@@ -4,6 +4,7 @@ class Task {
   final String description;
   final DateTime reminderTime;
   final bool isCompleted;
+  final bool isFlagged;
 
   Task({
     required this.id,
@@ -11,6 +12,7 @@ class Task {
     required this.description,
     required this.reminderTime,
     this.isCompleted = false,
+    this.isFlagged = false,
   });
 
   // fromJson method for deserialization
@@ -21,6 +23,7 @@ class Task {
       description: json['description'],
       reminderTime: DateTime.parse(json['reminderTime']),
       isCompleted: json['isCompleted'] ?? false, // Default to false if not present
+      isFlagged: json['isFlagged'] ?? false, // Default to false if not present
     );
   }
 
@@ -32,6 +35,7 @@ class Task {
       'description': description,
       'reminderTime': reminderTime.toIso8601String(),
       'isCompleted': isCompleted,
+      'isFlagged': isFlagged,
     };
   }
 }
