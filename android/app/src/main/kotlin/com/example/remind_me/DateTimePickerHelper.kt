@@ -40,9 +40,6 @@ class DatePickerHelper(private val context: Context) {
 
         datePickerDialog.setOnDismissListener { println("DatePickerDialog dismissed") }
 
-        // datePickerDialog.show()
-        // val dialogWindow = datePickerDialog.window
-        // dialogWindow?.setBackgroundDrawableResource(android.R.color.transparent)
     }
 
     fun showTimePicker(onTimeSelected: (String) -> Unit) {
@@ -66,20 +63,16 @@ class DatePickerHelper(private val context: Context) {
                             // Return the selected time
                             onTimeSelected(formattedTime)
 
-                            // Show a Toast
                             println("Selected Time: $formattedTime")
                         },
                         currentHour,
                         currentMinute,
-                        true // Use 24-hour format
+                        true // 24-hour format
                 )
 
         println("TimePickerDialog shown")
 
-        // Show the dialog
         timePickerDialog.show()
 
-        // Optional: Handle dismiss event
-        timePickerDialog.setOnDismissListener { println("TimePickerDialog dismissed") }
     }
 }

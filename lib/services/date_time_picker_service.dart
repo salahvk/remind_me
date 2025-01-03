@@ -1,18 +1,16 @@
 import 'package:flutter/services.dart';
+import 'package:remind_me/config/method_channel/channel.dart';
 
 class DateTimePickerService {
-  static const platform = MethodChannel('com.example.remind_me/datePicker');
+  static const platform = MethodChannel(RemindMeChannels.dateTimeChannel);
 
   // Function to call the native Date Picker
   Future<String?> showDatePicker() async {
     try {
-      // Invoke the method to show the Date Picker dialog
       final String? selectedDate =
-          await platform.invokeMethod('showDatePicker');
-      print("Selected Date: $selectedDate");
-      return selectedDate; // You could return the date here if needed, but this will handle UI
+          await platform.invokeMethod(RemindMeChannelMethods.showDatePicker);
+      return selectedDate;
     } on PlatformException catch (e) {
-      print("Failed to show DatePicker: '${e.message}'.");
       return "Error: ${e.message}";
     }
   }
@@ -20,23 +18,12 @@ class DateTimePickerService {
   // Function to call the native Time Picker
   Future<String?> showTimePicker() async {
     try {
-      // Invoke the method to show the Time Picker dialog
-      final String? selectedTime = await platform.invokeMethod('showTimePicker');
-      return selectedTime; // Similar to DatePicker, this can be handled via UI or callback
+      final String? selectedTime =
+          await platform.invokeMethod(RemindMeChannelMethods.showTimePicker);
+      return selectedTime;
     } on PlatformException catch (e) {
-      print("Failed to show TimePicker: '${e.message}'.");
       return "Error: ${e.message}";
     }
   }
 
-  // Listen for the selected date or time, can be set in your app's initState or elsewhere
-  static Future<String?> getPickedDateOrTime(MethodCall call) async {
-    if (call.method == "onDatePicked") {
-      return call.arguments;
-    } else if (call.method == "onTimePicked") {
-      return call.arguments;
-    } else {
-      return null;
-    }
-  }
 }
