@@ -1,5 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:remind_me/config/method_channel/channel.dart';
 import 'package:remind_me/core/utils/getters/get_texttheme.dart';
+import 'package:remind_me/features/task/presentation/bloc/task_bloc.dart';
 import 'package:remind_me/features/task/presentation/pages/home/widgets/footer.dart';
 import 'package:remind_me/features/task/presentation/pages/home/widgets/grid.dart';
 import 'package:remind_me/features/task/presentation/pages/home/widgets/search_bar.dart';
@@ -9,6 +15,17 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const platform =
+        MethodChannel(AndroidChannels.notificationMarkAsDoneChannel);
+
+    platform.setMethodCallHandler((call) async {
+      if (call.method == 'markAsDone') {
+        final String taskId = call.arguments;
+        // Handle the task ID
+        debugPrint('Task ID: $taskId marked as done');
+        context.read<TaskBloc>().add(TaskEvent.markTaskCompleted(taskId));
+      }
+    });
     return Scaffold(
       appBar: AppBar(
           title: Text(
@@ -27,7 +44,7 @@ class HomeScreen extends StatelessWidget {
             // Heading: My List
             HomeTitleWidget(),
 
-            // GridView 
+            // GridView
             HomeGridWidget(),
 
             // Reminder Tile -> want to complete this
@@ -38,8 +55,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-
 
 class HomeTitleWidget extends StatelessWidget {
   const HomeTitleWidget({

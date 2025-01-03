@@ -115,21 +115,13 @@ class MarkAsDoneReceiver : BroadcastReceiver() {
                 resultIntent.putExtra("taskId", taskId)
                 resultIntent.putExtra("isDone", true)
                 context.sendBroadcast(resultIntent)
-                // sendBroadcastToFlutter(taskId, context)
 
                 eventSink?.success(mapOf("taskId" to taskId, "isDone" to true))
-                // Send the result using LocalBroadcastManager
-                // Broadcast .getInstance(context).sendBroadcast(resultIntent)
                 val engine = flutterEngine!!
-                MethodChannel(engine.dartExecutor.binaryMessenger, "com.example.remind_me/task")
+                MethodChannel(
+                                engine.dartExecutor.binaryMessenger,
+                                "remind_me_android/notificationMarkAsDoneChannel"
+                        )
                         .invokeMethod("markAsDone", taskId)
-                // flutterEngine?.let { engine ->
-                //         MethodChannel(
-                //                         engine.dartExecutor.binaryMessenger,
-                //                         "com.example.remind_me/task"
-                //                 )
-                //                 .invokeMethod("markAsDone", taskId)
-                // }
         }
 }
-

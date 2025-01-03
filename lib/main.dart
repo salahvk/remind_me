@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:remind_me/config/route/go_router.dart';
 import 'package:remind_me/config/theme/light_theme.dart';
@@ -24,8 +23,6 @@ class RemindMeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    // Create repository instance
     final TaskRepository taskRepository = TaskRepositoryImpl();
 
     return MultiBlocProvider(

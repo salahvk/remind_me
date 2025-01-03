@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void authCheck(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () async {
       // bool isLoggedIn =
-      //     await ExpenseDBHelper().isUserLoggedIn(getUserEmail() ?? '');
+      //     await Remind().isUserLoggedIn(getUserEmail() ?? '');
       // isLoggedIn
       //     ? context.pushReplacement(
       //         Routes.getHomeRoute(),
@@ -67,7 +67,7 @@ class SplashLogoWidget extends StatelessWidget {
     return Hero(
       tag: "logo",
       child: const Icon(
-        Icons.task,
+        Icons.add_task,
         size: 150,
       ).animate().scale(duration: 600.ms).fadeIn(duration: 600.ms),
     );
