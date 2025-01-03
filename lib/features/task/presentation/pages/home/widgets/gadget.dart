@@ -7,19 +7,19 @@ import 'package:remind_me/features/task/domain/entities/task.dart';
 class HomeGadget extends StatelessWidget {
   final int index;
   final int taskCount;
-  final List<Task> tasks;
+
   const HomeGadget(
       {super.key,
       required this.index,
       required this.taskCount,
-      required this.tasks});
+      });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         context.push(Routes.getTaskRoute(),
-            extra: {'title': _getHeading(index), 'tasks': tasks});
+            extra: {'title': _getHeading(index), 'categoryIndex': index});
       },
       child: Card(
         shape: RoundedRectangleBorder(

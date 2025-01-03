@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:remind_me/config/route/route_constants.dart';
+import 'package:remind_me/core/utils/getters/get_category_task.dart';
 import 'package:remind_me/features/task/domain/entities/task.dart';
 
 import '../bloc/task_bloc.dart';
@@ -26,6 +27,10 @@ class TaskScreen extends StatelessWidget {
             return Center(child: Text(state.errorMessage!));
           }
 
+          // Get tasks for the selected category using the index
+          final int categoryIndex = args['categoryIndex'] as int;
+          final filteredTasks = getTasksForCategory(state.tasks, categoryIndex);
+
           return Column(
             children: [
               Padding(
@@ -43,9 +48,9 @@ class TaskScreen extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: args['tasks'].length as int,
+                  itemCount: filteredTasks.length,
                   itemBuilder: (context, index) {
-                    final task = args['tasks'][index] as Task;
+                    final task = filteredTasks[index];
                     final now = DateTime.now();
                     final today = DateTime(now.year, now.month, now.day);
                     final taskDate = DateTime(
@@ -58,7 +63,7 @@ class TaskScreen extends StatelessWidget {
                     bool showNotTodayHeader = index == 0 && taskDate != today;
 
                     if (index > 0) {
-                      final prevTask = state.tasks[index - 1];
+                      final prevTask = filteredTasks[index - 1];
                       final prevTaskDate = DateTime(
                         prevTask.reminderTime.year,
                         prevTask.reminderTime.month,
