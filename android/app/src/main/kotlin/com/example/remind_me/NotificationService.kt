@@ -11,6 +11,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
+import io.flutter.plugin.common.MethodChannel
 
 class NotificationService : BroadcastReceiver() {
 
@@ -83,6 +84,14 @@ class NotificationService : BroadcastReceiver() {
 }
 
 class MarkAsDoneReceiver : BroadcastReceiver() {
+        companion object {
+                var flutterEngine: FlutterEngine? = null
+                private var eventSink: EventChannel.EventSink? = null
+
+                fun setEventSink(eventSink: EventChannel.EventSink) {
+                        this.eventSink = eventSink
+                }
+        }
         private var eventSink: EventChannel.EventSink? = null
         fun setEventSink(eventSink: EventChannel.EventSink) {
                 this.eventSink = eventSink
@@ -106,24 +115,35 @@ class MarkAsDoneReceiver : BroadcastReceiver() {
                 resultIntent.putExtra("taskId", taskId)
                 resultIntent.putExtra("isDone", true)
                 context.sendBroadcast(resultIntent)
-                sendBroadcastToFlutter(taskId, context)
+                // sendBroadcastToFlutter(taskId, context)
 
                 eventSink?.success(mapOf("taskId" to taskId, "isDone" to true))
                 // Send the result using LocalBroadcastManager
                 // Broadcast .getInstance(context).sendBroadcast(resultIntent)
+                val engine = flutterEngine!!
+                MethodChannel(engine.dartExecutor.binaryMessenger, "com.example.remind_me/task")
+                        .invokeMethod("markAsDone", taskId)
+                // flutterEngine?.let { engine ->
+                //         MethodChannel(
+                //                         engine.dartExecutor.binaryMessenger,
+                //                         "com.example.remind_me/task"
+                //                 )
+                //                 .invokeMethod("markAsDone", taskId)
+                // }
         }
 }
 
-private fun sendBroadcastToFlutter(taskId: String?, context: Context) {
+// private fun sendBroadcastToFlutter(taskId: String?, context: Context) {
 
-        val flutterEngine: FlutterEngine = FlutterEngine(context)
-        flutterEngine.dartExecutor
-        val channel = EventChannel(flutterEngine.dartExecutor, "com.example.remind_me/mark_as_done")
+//         val flutterEngine: FlutterEngine = FlutterEngine(context)
+//         flutterEngine.dartExecutor
+//         val channel = EventChannel(flutterEngine.dartExecutor,
+// "com.example.remind_me/mark_as_done")
 
-        val data = mutableMapOf<String, Any>()
-        data["taskId"] = taskId ?: ""
-        data["isDone"] = true
+//         val data = mutableMapOf<String, Any>()
+//         data["taskId"] = taskId ?: ""
+//         data["isDone"] = true
 
-        // Sending data to Flutter
-        // channel. send(data)
-}
+//         // Sending data to Flutter
+//         channel.
+// }

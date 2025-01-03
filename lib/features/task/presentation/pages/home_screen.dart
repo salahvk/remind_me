@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:remind_me/config/route/route_constants.dart';
@@ -12,6 +13,16 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const platform = MethodChannel('com.example.remind_me/task');
+
+    platform.setMethodCallHandler((call) async {
+      if (call.method == 'markAsDone') {
+        final String taskId = call.arguments;
+        // Handle the task ID
+        print('Task ID: $taskId marked as fdsfdsdone');
+        context.read<TaskBloc>().add(TaskEvent.markTaskCompleted(taskId));
+      }
+    });
     return Scaffold(
       appBar: AppBar(title: const Text('Taskify')),
       body: BlocBuilder<TaskBloc, TaskState>(
@@ -64,7 +75,8 @@ class HomeScreen extends StatelessWidget {
                   // Show "Today" header if required
                   if (showTodayHeader)
                     Padding(
-                      padding: const EdgeInsets.only(left: 12,top: 8,bottom: 8),
+                      padding:
+                          const EdgeInsets.only(left: 12, top: 8, bottom: 8),
                       child: Text(
                         "Today",
                         style: TextStyle(
@@ -77,7 +89,8 @@ class HomeScreen extends StatelessWidget {
                   // Show "Not Today" header if required
                   if (showNotTodayHeader)
                     Padding(
-                      padding: const EdgeInsets.only(left: 12,top: 8,bottom: 8),
+                      padding:
+                          const EdgeInsets.only(left: 12, top: 8, bottom: 8),
                       child: Text(
                         "Upcoming",
                         style: TextStyle(

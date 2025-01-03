@@ -26,7 +26,7 @@ class MainActivity : FlutterActivity() {
                 super.onStart()
 
                 // Register the receiver
-                markAsDoneReceiver = MarkAsDoneReceiver()
+                
 
         }
 
@@ -42,6 +42,8 @@ class MainActivity : FlutterActivity() {
                 requestNotificationPermission()
 
                 GeneratedPluginRegistrant.registerWith(flutterEngine)
+                markAsDoneReceiver = MarkAsDoneReceiver()
+                MarkAsDoneReceiver.flutterEngine = flutterEngine
 
                 // Set up the EventChannel
                 val channel = EventChannel(flutterEngine.dartExecutor, MARK_AS_DONE_EVENT_CHANNEL)
@@ -54,6 +56,8 @@ class MainActivity : FlutterActivity() {
                                         // Handle stream listener
                                         print("Listening to Mark as Done events")
                                         markAsDoneReceiver.setEventSink(events!!)
+                                        markAsDoneReceiver.onReceive(context, intent)
+                                        
                                 }
 
                                 override fun onCancel(arguments: Any?) {
