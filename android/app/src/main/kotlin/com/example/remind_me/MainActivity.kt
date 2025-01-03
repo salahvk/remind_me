@@ -8,31 +8,77 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
+import io.flutter.plugins.GeneratedPluginRegistrant
+import android.content.IntentFilter
+
 
 class MainActivity : FlutterActivity() {
 
         private val NOTIFICATION_CHANNEL = "com.example.remind_me/notifications"
         private val DATE_TIME_CHANNEL = "com.example.remind_me/dateTimePicker"
+        private val MARK_AS_DONE_EVENT_CHANNEL = "com.example.remind_me/mark_as_done"
+
+        private lateinit var markAsDoneReceiver: MarkAsDoneReceiver
+
+        override fun onStart() {
+                super.onStart()
+
+                // Register the receiver
+                markAsDoneReceiver = MarkAsDoneReceiver()
+
+        }
+
+        override fun onStop() {
+                super.onStop()
+
+                // Unregister receiver when no longer needed
+                unregisterReceiver(markAsDoneReceiver)
+        }
 
         override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
                 super.configureFlutterEngine(flutterEngine)
                 requestNotificationPermission()
 
+                GeneratedPluginRegistrant.registerWith(flutterEngine)
+
+                // Set up the EventChannel
+                val channel = EventChannel(flutterEngine.dartExecutor, MARK_AS_DONE_EVENT_CHANNEL)
+                channel.setStreamHandler(
+                        object : EventChannel.StreamHandler {
+                                override fun onListen(
+                                        arguments: Any?,
+                                        events: EventChannel.EventSink?
+                                ) {
+                                        // Handle stream listener
+                                        print("Listening to Mark as Done events")
+                                        markAsDoneReceiver.setEventSink(events!!)
+                                }
+
+                                override fun onCancel(arguments: Any?) {
+                                        // Handle stream cancellation
+                                }
+                        }
+                )
+
                 MethodChannel(flutterEngine.dartExecutor.binaryMessenger, NOTIFICATION_CHANNEL)
                         .setMethodCallHandler { call, result ->
                                 if (call.method == "scheduleNotification") {
                                         val notificationScheduler = NotificationScheduler(this)
+                                        val taskId = call.argument<String>("taskId")!!
                                         val title = call.argument<String>("title")
                                         val description = call.argument<String>("description")
                                         val timeMillis = call.argument<Long>("timeMillis")
 
+                                        println("Task ID: $taskId")
                                         notificationScheduler.scheduleNotification(
+                                                taskId,
                                                 title!!,
                                                 description!!,
                                                 timeMillis!!
                                         )
-                                        result.success(null)
+                                        result.success("null _________________")
                                 }
                         }
 

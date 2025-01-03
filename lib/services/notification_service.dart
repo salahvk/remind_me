@@ -5,9 +5,10 @@ class NativeNotificationService {
   static const _channel = MethodChannel(RemindMeChannels.notificationChannel);
 
   static Future<void> scheduleNotification(
-      String title, String description, DateTime time) async {
+      String taskId, String title, String description, DateTime time) async {
     final timeMillis = time.millisecondsSinceEpoch;
     await _channel.invokeMethod(RemindMeChannelMethods.scheduleNotification, {
+      'taskId': taskId,
       'title': title,
       'description': description,
       'timeMillis': timeMillis,

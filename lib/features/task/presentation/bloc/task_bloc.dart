@@ -44,6 +44,7 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
   void _onAddTask(_AddTaskEvent event, Emitter<TaskState> emit) {
     Task task = event.task;
     NativeNotificationService.scheduleNotification(
+      task.id,
       task.title,
       task.description,
       task.reminderTime,

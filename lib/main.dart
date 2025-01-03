@@ -7,6 +7,7 @@ import 'package:remind_me/features/task/domain/repositories/task_repository.dart
 import 'package:remind_me/features/task/presentation/bloc/task_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:remind_me/services/task_receiver.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +15,11 @@ void main() async {
   final storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
+  print("__");
+  TaskReceiver.taskDoneStream.listen((event) {
+    print('Task marked as done: ${event['taskId']}');
+    // Handle the event (like updating UI, showing notifications, etc.)
+  });
   HydratedBloc.storage = storage;
   runApp(const RemindMeApp());
 }
