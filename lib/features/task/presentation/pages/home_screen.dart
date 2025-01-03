@@ -74,9 +74,9 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   // Show "Today" header if required
                   if (showTodayHeader)
-                    Padding(
+                    const Padding(
                       padding:
-                          const EdgeInsets.only(left: 12, top: 8, bottom: 8),
+                          EdgeInsets.only(left: 12, top: 8, bottom: 8),
                       child: Text(
                         "Today",
                         style: TextStyle(
@@ -88,9 +88,9 @@ class HomeScreen extends StatelessWidget {
 
                   // Show "Not Today" header if required
                   if (showNotTodayHeader)
-                    Padding(
+                    const Padding(
                       padding:
-                          const EdgeInsets.only(left: 12, top: 8, bottom: 8),
+                          EdgeInsets.only(left: 12, top: 8, bottom: 8),
                       child: Text(
                         "Upcoming",
                         style: TextStyle(
