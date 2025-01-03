@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:remind_me/config/route/go_router.dart';
 import 'package:remind_me/config/theme/light_theme.dart';
@@ -7,6 +8,7 @@ import 'package:remind_me/features/task/domain/repositories/task_repository.dart
 import 'package:remind_me/features/task/presentation/bloc/task_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:remind_me/services/task_receiver.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +16,11 @@ void main() async {
   final storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
+  print("__");
+  TaskReceiver.taskDoneStream.listen((event) {
+    print('Task marked as donegdgs: ${event['taskId']}');
+    // Handle the event (like updating UI, showing notifications, etc.)
+  });
   HydratedBloc.storage = storage;
   runApp(const RemindMeApp());
 }
@@ -23,6 +30,7 @@ class RemindMeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     // Create repository instance
     final TaskRepository taskRepository = TaskRepositoryImpl();
 
