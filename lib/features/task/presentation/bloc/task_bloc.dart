@@ -1,14 +1,10 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:remind_me/core/extension/string_date_time.dart';
 import 'package:remind_me/features/task/domain/repositories/task_repository.dart';
 import 'package:remind_me/services/date_time_picker_service.dart';
+import 'package:remind_me/services/notification_service.dart';
 import '../../domain/entities/task.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../domain/entities/task.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../domain/entities/task.dart';
-
 part 'task_bloc.freezed.dart';
 part 'task_event.dart';
 part 'task_state.dart';
@@ -46,7 +42,13 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
   }
 
   void _onAddTask(_AddTaskEvent event, Emitter<TaskState> emit) {
-    final updatedTasks = [...state.tasks, event.task];
+    Task task = event.task;
+    NativeNotificationService.scheduleNotification(
+      task.title,
+      task.description,
+      task.reminderTime,
+    );
+    final updatedTasks = [...state.tasks, task];
     emit(state.copyWith(tasks: updatedTasks));
   }
 
