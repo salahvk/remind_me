@@ -8,6 +8,7 @@ import 'package:remind_me/features/task/presentation/bloc/task_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
+// To test added comments to branch master
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
